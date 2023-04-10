@@ -3,9 +3,6 @@
 /* Padding below the footer and lighter body text */
 
 body {
-
-  padding-top: 3rem;
-  padding-bottom: 3rem;
   color: #5a5a5a;
 }
 
@@ -139,4 +136,33 @@ overflow-x: auto;
 text-align: center;
 white-space: nowrap;
 -webkit-overflow-scrolling: touch;
+}
+
+.product-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-information {
+    font-size: 1.3em;
+  margin-bottom: auto;
+}
+
+.product-button {
+  margin-top: auto;
+}
+
+.product-price {
+  font-size: 1.5em;
+  color: black;
+}
+
+.characteristics {
+  text-align: center;
+}
+
+.characteristics h1 {
+  display: inline-block; /* зробити h1 блоком, щоб можна було використовувати властивість text-align */
+  text-align: center; /* вирівнювання тексту по центру */
 }

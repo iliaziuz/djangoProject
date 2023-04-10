@@ -4,6 +4,153 @@
 {% block title %}
 {{ product.title }}
 {% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'product/css/general.css'%}">
+{% endblock %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7">
+            <img src="{{ images.0.image.url }}" alt="{{ product.name }}" height="100%" width="100%">
+        </div>
+        <div class="col-sm-5">
+            <div class="product-column">
+                <div class="product-information">
+                    <h1>{{product.brand}}</h1>
+                    <p>{{product.name}}</p>
+                    <p>Ціна <b class="product-price">{{product.price}} грн</b></p>
+                </div>
+                <div class="product-button">
+                    <button type="button" class="btn btn-outline-primary me-2">Додати в кошик</button>
+                    <button type="button" class="btn btn-primary">Придбати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div style="visibility: hidden;">
+            <p>space</p>
+        </div>
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom border-top">
+            <div class="col-md-3 mb-2 mb-md-0" style="visibility: hidden;">
+                <p>space</p>
+            </div>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" >
+                <h3>Характеристики</h3>
+            </ul>
+
+            <div class="col-md-3 text-end" style="visibility: hidden;">
+                <p>space</p>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-sm-2" style="visibility: hidden;">space</div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-6 ">
+                        <p>Бренд</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{product.brand}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Стать</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.gender}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Форма оправи</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.glass_form}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Матеріал оправи</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.glass_material}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Колір оправи</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.glass_color}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Колір лінз</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.lens_color}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Розмір окуляра</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.size_eyepiece}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Розмір мостика</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.size_bridge}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Розмір завушника</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <p>{{characteristics.size_earring}}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-2" style="visibility: hidden;">space</div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div style="visibility: hidden;">
+            <p>space</p>
+        </div>
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom border-top">
+            <div class="col-md-3 mb-2 mb-md-0" style="visibility: hidden;">
+                <p>space</p>
+            </div>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" >
+                <h3>Опис товару</h3>
+            </ul>
+
+            <div class="col-md-3 text-end" style="visibility: hidden;">
+                <p>space</p>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-sm-2" style="visibility: hidden;">space</div>
+            <div class="col-8">
+                {{product.description}}
+            </div>
+            <div class="col-sm-2" style="visibility: hidden;">space</div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}
