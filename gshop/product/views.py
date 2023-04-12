@@ -7,13 +7,6 @@ class ProductDetailView(DetailView):
     template_name = 'product/product_view.html'
     context_object_name = 'product'
 
-    '''def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        product = self.get_object()
-        images = product.images.all()
-        context['images'] = images
-        return context'''
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.get_object()

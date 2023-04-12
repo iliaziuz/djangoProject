@@ -1,0 +1,109 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'catalog/css/sidebars.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+      <li class="breadcrumb-item">
+        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">
+          <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+          Home
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Library</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Data
+      </li>
+    </ol>
+  </nav>
+</div>
+
+<div class="container my-5">
+    <img src="{% static 'catalog/img/img1.jpg' %}" class="img-fluid" alt="..." style="width: 100%; height: auto;">
+</div>
+
+<div class="container my-5">
+  <nav class="navbar bg-body-tertiary" aria-label="Light offcanvas navbar">
+    <div class="container-fluid">
+      <h1 class="display-5">{{products.0.characteristics.category}}</h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight" aria-labelledby="offcanvasNavbarLightLabel">
+        <div class="offcanvas-header border-bottom">
+          <h4 class="offcanvas-title" id="offcanvasNavbarLightLabel">ФІЛЬТР</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            {% for key in filter_dict.items %}
+            <ul class="list-unstyled ps-0">
+              <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#{{ key.0|cut:" " }}-collapse" aria-expanded="false">
+                  {{ key.0}}
+                </button>
+                <div class="collapse" id="{{ key.0|cut:" " }}-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    {% for filter_element in key.1 %}
+                    <li>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="{{ filter_element|cut:" " }}">
+                        <label class="form-check-label" for="{{ filter_element|cut:" " }}">
+                          {{ filter_element }}
+                        </label>
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+            </ul>
+            {% endfor %}
+          </ul>
+          <div class="d-flex gap-2 justify-content-center py-5">
+            <button class="btn btn-primary rounded-pill px-3" type="button">Шукати</button>
+            <button class="btn btn-secondary rounded-pill px-3" type="button">Очистити всі фільтри</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+{% if products %}
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <disv class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+      {% for product in products %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" width="100%" height="200" id="{{ product.name }}" onmouseover="showNextImage(id)"  style="display: block">
+          <img src="{{ product.images.all.1.image.url }}" alt="{{ product.name }}" width="100%" height="200" id="{{ product.name }} next" onmouseout="hideNextImage(alt)" style="display: none">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
+              </div>
+              <small class="text-body-secondary">{{product.price}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </disv>
+  </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'catalog/js/catalog.js' %}"></script>
+{% endblock %}

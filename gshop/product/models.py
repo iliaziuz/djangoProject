@@ -11,8 +11,8 @@ class Product(models.Model):
         return self.name
 
     class Meta:
-         verbose_name = 'Product'
-         verbose_name_plural = 'Products'
+         verbose_name = 'Товар'
+         verbose_name_plural = 'Товари'
 
 
 class ProductImages(models.Model):
@@ -24,22 +24,40 @@ class ProductImages(models.Model):
 
 
 class GlassCharacteristics(models.Model):
-    SEX_CHOICES = [('M', 'Чоловічі'),('W', 'Жіночі'),('U','Унісекс')]
-    FORM_CHOICES = [('С', 'Кругла'), ('N', 'Нестандартна'), ('S','Квадратна'), ('C', 'Котяче око'), ('P', 'Прямокутна')]
-    COLOR_CHOICES = [('#FFFFFF', 'білий'), ('#00BFFF', 'блакитний'), ('#800000', 'бордовий'),('#FFFF00', 'жовтий'),
-                     ('#008000', 'зелений'), ('#FFD700', 'золотий'), ('#8B4513', 'карі'), ('#964B00', 'коричневий'),
-                     ('#FFA500', 'помаранчевий'), ('#######', 'прозорий'), ('#FFC0CB', 'рожевий'),
-                     ('#808080', 'сірий'), ('#0000FF', 'синій'), ('#00008B', 'темно-синій'), ('#800080', 'фіолетовий'),
-                     ('#000000', 'чорний')]
-    MATERIAL_CHOICES = [('metal', 'метал'), ('titanium', 'титан'),('stainless steel', 'нержавіюча сталь'),
-                        ('plastic', 'пластик'), ('wood', 'дерево')]
+    SEX_CHOICES = [('Чоловічі', 'Чоловічі'),('Жіночі', 'Жіночі'),('Унісекс','Унісекс'),('Дитячі','Дитячі')]
+    FORM_CHOICES = [('Кругла', 'Кругла'), ('Нестандартна', 'Нестандартна'), ('Квадратна','Квадратна'),
+                    ('Котяче око', 'Котяче око'), ('Прямокутна', 'Прямокутна')]
+    COLOR_CHOICES = [('Білий', 'Білий'), ('Блакитний', 'Блакитний'), ('Бордовий', 'Бордовий'),('Жовтий', 'Жовтий'),
+                     ('Зелений', 'Зелений'), ('Золотий', 'Золотий'), ('Коричневий', 'Коричневий'),
+                     ('Помаранчевий', 'Помаранчевий'), ('Прозорий', 'Прозорий'), ('Рожевий', 'Рожевий'),
+                     ('Сірий', 'Сірий'), ('Синій', 'Синій'), ('Срібний', 'Срібний'), ('Темно-синій', 'Темно-синій'),
+                     ('Фіолетовий', 'Фіолетовий'), ('Чорний', 'Чорний')]
+    MATERIAL_CHOICES = [('Метал', 'Метал'), ('Титан', 'Титан'), ('Нержавіюча сталь', 'Нержавіюча сталь'),
+                        ('Пластик', 'Пластик'), ('Дерево', 'Дерево')]
+    CATEGORY_CHOICES = [('Сонцезахисні окуляри', 'Сонцезахисні окуляри'), ('Оправи', 'Оправи')]
 
-    gender = models.CharField('Стать', max_length=1, choices=SEX_CHOICES)
-    glass_form = models.CharField('Форма окулярів', max_length=1, choices=FORM_CHOICES)
-    glass_color = models.CharField('Колір окулярів', max_length=7, choices=COLOR_CHOICES)
-    lens_color = models.CharField('Колір лінз', max_length=7, choices=COLOR_CHOICES)
-    glass_material = models.CharField('Матеріал оправи', max_length=15, choices=MATERIAL_CHOICES)
-    size_eyepiece = models.PositiveIntegerField('Розмір окуляра')
-    size_earring = models.PositiveIntegerField('Розмір завушника')
-    size_bridge = models.PositiveIntegerField('Розмір мостика')
+    category = models.CharField('Категорія', max_length=20, choices=CATEGORY_CHOICES, blank=True)
+    gender = models.CharField('Стать', max_length=10, choices=SEX_CHOICES)
+    glass_form = models.CharField('Форма окулярів', max_length=15, choices=FORM_CHOICES)
+    glass_color = models.CharField('Колір окулярів', max_length=20, choices=COLOR_CHOICES)
+    lens_color = models.CharField('Колір лінз', max_length=15, choices=COLOR_CHOICES, blank=True, null=True)
+    glass_material = models.CharField('Матеріал оправи', max_length=20, choices=MATERIAL_CHOICES)
+    size_eyepiece = models.PositiveIntegerField('Розмір окуляра', blank=True)
+    size_earring = models.PositiveIntegerField('Розмір завушника', blank=True)
+    size_bridge = models.PositiveIntegerField('Розмір мостика', blank=True)
     product = models.OneToOneField(Product, related_name='characteristics', on_delete=models.CASCADE)
+
+
+'''
+class LensCharacteristics(models.Model):
+    CATEGORY_CHOICES = [('Для далі (+ або -)', 'Для далі (+ або -)'), ('Торичні', 'Торичні'),
+                        ('Мультифокальні', 'Мультифокальні'), ('Кольорові', 'Кольорові'),
+                        ('', ''), ('', '')]
+    REPLACEMENT_MODE_CHOICES = [('1 день', '1 день'), ('2 тижні', '2 тижні'), ('1 місяць', '1 місяць'),
+                                ('3 місяці', '3 місяці'), ('6 місяці', '6 місяці'), ('9 місяці', '9 місяці'),
+                                ('12 місяці', '12 місяці')]
+
+    category = models.CharField('Категорія', max_length=20, choices=CATEGORY_CHOICES)
+    replacement_mode = models.CharField('Режим заміни', max_length=20, choices=REPLACEMENT_MODE_CHOICES)
+    product = models.OneToOneField(Product, related_name='characteristics', on_delete=models.CASCADE)
+'''

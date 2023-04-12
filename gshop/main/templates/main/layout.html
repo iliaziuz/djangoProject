@@ -24,9 +24,9 @@
       </div>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2">Сонцезахисні окуляри</a></li>
-        <li><a href="#" class="nav-link px-2">Оправи</a></li>
-        <li><a href="#" class="nav-link px-2">Лінзи</a></li>
+        <li><a href="{% url 'category' 'sunglasses' %}" class="nav-link px-2">Сонцезахисні окуляри</a></li>
+        <li><a href="{% url 'category' 'eyeglasses' %}" class="nav-link px-2">Оправи</a></li>
+        <li><a href="{% url 'category' 'eyeglasses' %}" class="nav-link px-2">Лінзи</a></li>
         <li><a href="/admin" class="nav-link px-2">Admin</a></li>
       </ul>
 
@@ -60,6 +60,8 @@
 
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="{% static 'main/js/bootstrap.bundle.min.js' %}"></script>
+  {% block script %}
+  {% endblock %}
 
 </body>
 </html>
