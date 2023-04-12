@@ -46,13 +46,13 @@
             <ul class="list-unstyled ps-0">
               <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#{{ key.0|cut:" " }}-collapse" aria-expanded="false">
-                  {{ key.0}}
+                  {{ key.0 }}
                 </button>
                 <div class="collapse" id="{{ key.0|cut:" " }}-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     {% for filter_element in key.1 %}
                     <li>
-                      <div class="form-check">
+                      <div class="form-check" style="margin-left: 30px">
                         <input class="form-check-input" type="checkbox" value="" id="{{ filter_element|cut:" " }}">
                         <label class="form-check-label" for="{{ filter_element|cut:" " }}">
                           {{ filter_element }}
@@ -67,8 +67,12 @@
             {% endfor %}
           </ul>
           <div class="d-flex gap-2 justify-content-center py-5">
-            <button class="btn btn-primary rounded-pill px-3" type="button">Шукати</button>
-            <button class="btn btn-secondary rounded-pill px-3" type="button">Очистити всі фільтри</button>
+            <a id="filter_link" href="{% url 'filter' %}" >
+              <button class="btn btn-primary rounded-pill px-3" type="button" onclick="getChecked()">Шукати</button>
+            </a>
+            <a href="{% url 'category' 'eyeglasses' %}">
+              <button class="btn btn-secondary rounded-pill px-3" type="button">Очистити всі фільтри</button>
+            </a>
           </div>
         </div>
       </div>
@@ -79,7 +83,7 @@
 {% if products %}
 <div class="album py-5 bg-body-tertiary">
   <div class="container">
-    <disv class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+    <disv class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3">
       {% for product in products %}
       <div class="col">
         <div class="card shadow-sm">
@@ -106,4 +110,5 @@
 
 {% block script %}
   <script src="{% static 'catalog/js/catalog.js' %}"></script>
+  <script src="{% static 'catalog/js/getChecked.js' %}"></script>
 {% endblock %}

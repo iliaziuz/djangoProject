@@ -15,6 +15,8 @@ filter_dict = {'Стать': [choice[0] for choice in GlassCharacteristics.SEX_C
                }
 
 
+
+
 def catalog_by_category(request, category):
     characteristics = GlassCharacteristics.objects.filter(category=category_map.get(category))
     products = [characteristic.product for characteristic in characteristics]
@@ -23,13 +25,9 @@ def catalog_by_category(request, category):
     return render(request, 'catalog/catalog.html', context)
 
 
-def catalog_by_brand(request, category, brand):
-    products = Product.objects.filter(category=category, brand=brand)
-    context = {'products': products}
-    return render(request, 'catalog/catalog.html', context)
+def catalog_by_filter(request, filter_str):
+    filter_list = filter_str.split('+')
+    context = {'products': filter_str,
+               'filter_dict': filter_list}
+    return render(request, 'catalog/index.html', context)
 
-
-def catalog_by_sex(request, category, sex):
-    products = Product.objects.filter(category=category, sex=sex)
-    context = {'products': products}
-    return render(request, 'catalog/catalog.html', context)
